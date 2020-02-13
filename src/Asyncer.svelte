@@ -2,6 +2,7 @@
 // call async function
 import Dispatcher from './Dispatcher.svelte'
 import Input from "./Input.svelte"
+import {mystore} from './mystore.js'
 let promise = getNumber()
 function delay(ms) {
     return new Promise(res=>setTimeout(res,ms))
@@ -19,12 +20,18 @@ function catchCustom(event) {
 let handleClick =()=> {
     promise = getNumber()
     // connect to the dispatcher
+    promise.then(n=> {
+        mystore.update((e)=> e+n)
+    })
 }
 let text = "default"
 let handler = (e)=> {
     console.log("caugth",e.detail.text)
 }
-
+let store_value
+const unsubscribe = mystore.subscribe(v=> {
+    store_value = v
+})
 let handler2 = (e)=> {
     text = e.detail.text+"check"
 }
@@ -35,8 +42,8 @@ let handler2 = (e)=> {
 {#await promise}
 <p>waiting ...</p>
 {:then number}
-<p >number is {number}</p>
+<p>number is {number}{store_value}</p>
 {/await}
 <Dispatcher on:customEvent={handler}/>
 <div id="tset" on:customEvent={handler2}>{text}</div>
-<Input/>
+<p>{$mystore}</p>

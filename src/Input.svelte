@@ -1,10 +1,6 @@
 <script>
   let name = "worlda";
-  let a = 5
-  let mytestattr
-  let widthattr
-$: widthattr = `width:${mytestattr}px;height:${mytestattr}px` 
-setInterval(()=> {mytestattr=Math.floor(Math.random()*150)},1500)
+  let a = 5;
 </script>
 
 <style>
@@ -12,7 +8,7 @@ setInterval(()=> {mytestattr=Math.floor(Math.random()*150)},1500)
     width: 50%;
   }
   #fake {
-      background-color: blue;
+    background-color: blue;
   }
 </style>
 
@@ -20,10 +16,8 @@ setInterval(()=> {mytestattr=Math.floor(Math.random()*150)},1500)
 
 <h1>hello {name}</h1>
 
-<input type="text" name="" id="" bind:value={mytestattr}>
-<div id="fake"  style={widthattr}></div>
 
-<label >
-    <input type="range" name="" id="" bind:value={a}>
-    <input type="text" name="" id="num" bind:value={a}>
+<label>
+  <input type="range" name="" id="" bind:value={a} />
+  <input type="text" name="" id="num" bind:value={a} />
 </label>
